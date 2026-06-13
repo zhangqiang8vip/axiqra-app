@@ -1,0 +1,65 @@
+{
+  "app": {
+    "brand": "Axiqra",
+    "tagline": "为 AI 编程工具打造的工程记忆库"
+  },
+  "nav": {
+    "home": "首页",
+    "publicCases": "公开案例",
+    "leaderboard": "排行榜",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出"
+  },
+  "hero": {
+    "title": "工程记忆搜索引擎",
+    "subtitle": "为 AI 编程工具打造的工程记忆库。搜索真实案例、Trace、Solution，让 AI 真正理解你的代码上下文。",
+    "placeholder": "搜索问题、Trace、解决方案...",
+    "search": "搜索",
+    "orBrowse": "按分类浏览"
+  },
+  "categories": {
+    "title": "按分类浏览",
+    "codeCompletion": "代码补全",
+    "codeCompletionDesc": "自动补全、建议提示、多光标编辑",
+    "refactoring": "代码重构",
+    "refactoringDesc": "代码转换、模式迁移、代码清理",
+    "debugging": "调试排错",
+    "debuggingDesc": "错误分析、堆栈跟踪、修复生成",
+    "codeReview": "代码审查",
+    "codeReviewDesc": "PR 分析、最佳实践、安全检查",
+    "documentation": "文档生成",
+    "documentationDesc": "注释生成、README、API 文档",
+    "testing": "测试生成",
+    "testingDesc": "单元测试、集成测试、覆盖率"
+  },
+  "features": {
+    "title": "为什么选择 Axiqra",
+    "fastSearch": {
+      "title": "极速搜索",
+      "desc": "在数百万工程 traces 和 solutions 中实现亚秒级查询响应。"
+    },
+    "aiNative": {
+      "title": "AI 原生设计",
+      "desc": "从零开始为 AI 代理构建。每个 trace 都经过结构化处理，便于机器理解。"
+    },
+    "traceable": {
+      "title": "全程可追溯",
+      "desc": "从问题到解决方案——每一步都有记录，可复现，可审计。"
+    },
+    "collaborative": {
+      "title": "团队知识库",
+      "desc": "在团队内部分享工程洞察。构建一个持续更新的已解决问题代码库。"
+    }
+  },
+  "stats": {
+    "title": "快速成长中",
+    "traces": "已索引 Traces",
+    "solutions": "可用 Solutions",
+    "tools": "支持的 AI 工具",
+    "teams": "已入驻团队"
+  },
+  "footer": {
+    "copyright": "© 2025 Axiqra. 保留所有权利。"
+  }
+}

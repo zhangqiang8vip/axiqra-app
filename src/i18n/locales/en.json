@@ -1,0 +1,65 @@
+{
+  "app": {
+    "brand": "Axiqra",
+    "tagline": "Agent-ready engineering memory"
+  },
+  "nav": {
+    "home": "Home",
+    "publicCases": "Public Cases",
+    "leaderboard": "Leaderboard",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Engineering Memory Search",
+    "subtitle": "The knowledge base built for AI coding tools. Search real cases, traces, and solutions — give AI the context it truly needs.",
+    "placeholder": "Search problems, traces, solutions...",
+    "search": "Search",
+    "orBrowse": "Browse by category"
+  },
+  "categories": {
+    "title": "Browse by Category",
+    "codeCompletion": "Code Completion",
+    "codeCompletionDesc": "Autocomplete, suggestions, multi-cursor editing",
+    "refactoring": "Refactoring",
+    "refactoringDesc": "Code transformation, pattern migration, cleanup",
+    "debugging": "Debugging",
+    "debuggingDesc": "Error analysis, stack traces, fix generation",
+    "codeReview": "Code Review",
+    "codeReviewDesc": "PR analysis, best practice enforcement, security",
+    "documentation": "Documentation",
+    "documentationDesc": "Comment generation, README, API docs",
+    "testing": "Testing",
+    "testingDesc": "Unit tests, integration tests, coverage"
+  },
+  "features": {
+    "title": "Why Axiqra",
+    "fastSearch": {
+      "title": "Instant Search",
+      "desc": "Sub-100ms query response across millions of engineering traces and solutions."
+    },
+    "aiNative": {
+      "title": "AI-Native Design",
+      "desc": "Built from the ground up for AI agents. Every trace is structured for machine comprehension."
+    },
+    "traceable": {
+      "title": "Full Traceability",
+      "desc": "From problem to solution — every step is recorded, reproducible, and auditable."
+    },
+    "collaborative": {
+      "title": "Team Knowledge Base",
+      "desc": "Share engineering insights across your team. Build a living codebase of solved problems."
+    }
+  },
+  "stats": {
+    "title": "Growing Fast",
+    "traces": "Traces indexed",
+    "solutions": "Solutions available",
+    "tools": "AI tools supported",
+    "teams": "Teams onboarded"
+  },
+  "footer": {
+    "copyright": "© 2025 Axiqra. All rights reserved."
+  }
+}

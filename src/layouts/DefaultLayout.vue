@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useThemeStore } from '@/stores/theme'
+import { useAuthStore } from '@/stores/auth'
 import { setLocale } from '@/i18n'
 
 const { t, locale } = useI18n()
+const router = useRouter()
 const themeStore = useThemeStore()
+const authStore = useAuthStore()
 
 const isDark = computed(() => themeStore.theme === 'dark')
+const isLoggedIn = computed(() => authStore.isLoggedIn())
+const userMenuOpen = ref(false)
 
 function toggleLocale() {
   setLocale(locale.value === 'en' ? 'zh' : 'en')
+}
+
+function handleLogout() {
+  authStore.logout()
+  userMenuOpen.value = false
+  router.push('/login')
 }
 
 // Starfield canvas — lives in layout so it covers the whole viewport
@@ -19,7 +30,7 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 let animFrame: number
 let mouse = { x: -2000, y: -2000 }
 
-const PALETTE = [
+const PALETTE: Array<[number, number, number]> = [
   [37, 99, 235],
   [6, 182, 212],
   [20, 184, 166],
@@ -29,12 +40,13 @@ const PALETTE = [
   [251, 191, 36],
   [45, 212, 191],
 ]
+const DEFAULT_STAR_COLOR: [number, number, number] = [37, 99, 235]
 
 interface Star {
   x: number; y: number
   vx: number; vy: number
   r: number
-  color: number[]
+  color: [number, number, number]
 }
 
 function initStarfield() {
@@ -63,7 +75,7 @@ function initStarfield() {
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       r: Math.random() * 2 + 0.5,
-      color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
+      color: PALETTE[Math.floor(Math.random() * PALETTE.length)] ?? DEFAULT_STAR_COLOR,
     })
   }
 
@@ -95,6 +107,7 @@ function initStarfield() {
     for (let i = 0; i < stars.length; i++) {
       for (let j = i + 1; j < stars.length; j++) {
         const a = stars[i], b = stars[j]
+        if (!a || !b) continue
         const dx = a.x - b.x, dy = a.y - b.y
         const d = Math.sqrt(dx * dx + dy * dy)
         if (d < CONNECT_DIST) {
@@ -189,6 +202,7 @@ onUnmounted(() => {
 
         <nav class="nav">
           <a href="/" class="nav-link">{{ t('nav.home') }}</a>
+          <a v-if="isLoggedIn" href="/dashboard" class="nav-link">{{ t('nav.dashboard') }}</a>
           <a href="/public-cases" class="nav-link">{{ t('nav.publicCases') }}</a>
           <a href="/tool-models" class="nav-link">{{ t('nav.leaderboard') }}</a>
         </nav>
@@ -220,8 +234,50 @@ onUnmounted(() => {
           </button>
 
           <!-- Auth -->
-          <a href="/login" class="btn btn-ghost">{{ t('nav.login') }}</a>
-          <a href="/register" class="btn btn-primary">{{ t('nav.register') }}</a>
+          <template v-if="isLoggedIn">
+            <div class="user-menu">
+              <button class="user-btn" @click="userMenuOpen = !userMenuOpen">
+                <img
+                  :src="authStore.getAvatarUrl()"
+                  alt="avatar"
+                  class="user-avatar-img"
+                >
+                <span class="user-name">{{ authStore.user?.username || 'User' }}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <div v-if="userMenuOpen" class="user-dropdown">
+                <a href="/profile" class="dropdown-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  {{ t('nav.profile') || 'Profile' }}
+                </a>
+                <a href="/settings" class="dropdown-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                  </svg>
+                  {{ t('nav.settings') || 'Settings' }}
+                </a>
+                <hr class="dropdown-divider">
+                <button class="dropdown-item" @click="handleLogout">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                  </svg>
+                  {{ t('nav.logout') }}
+                </button>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <a href="/login" class="btn btn-ghost">{{ t('nav.login') }}</a>
+            <a href="/register" class="btn btn-primary">{{ t('nav.register') }}</a>
+          </template>
         </div>
       </div>
     </header>
@@ -431,5 +487,94 @@ onUnmounted(() => {
 .footer-copy {
   font-size: var(--text-sm);
   color: var(--color-text-tertiary);
+}
+
+/* User Menu */
+.user-menu {
+  position: relative;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.user-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.user-avatar,
+.user-avatar-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.user-avatar-img {
+  object-fit: cover;
+  border: 2px solid var(--color-border);
+}
+
+.user-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 180px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2);
+  z-index: 100;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  background: none;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.dropdown-item:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.dropdown-divider {
+  margin: var(--space-2) 0;
+  border: none;
+  border-top: 1px solid var(--color-border);
 }
 </style>

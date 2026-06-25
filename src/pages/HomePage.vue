@@ -1,14 +1,67 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import apiClient from '@/api/client'
+import { useAuthStore } from '@/stores/auth'
 
 const { t } = useI18n()
+const router = useRouter()
+const authStore = useAuthStore()
 const searchQuery = ref('')
 const inputRef = ref<HTMLInputElement | null>(null)
+const searchLoading = ref(false)
+const searchError = ref('')
+const searchResult = ref<SearchApiData | null>(null)
+const skillUrl = 'http://127.0.0.1:5173/skills/SKILL.md'
+const authCommand = 'node scripts/auth.js --start'
+const waitCommand = 'node scripts/auth.js --wait <device_code>'
 
-function handleSearch() {
+interface SearchItem {
+  id?: string | number
+  title?: string
+  summary?: string
+  content?: string
+  score?: number
+  [key: string]: unknown
+}
+
+interface SearchApiData {
+  results?: SearchItem[]
+  items?: SearchItem[]
+  candidateSeed?: unknown
+  message?: string
+  [key: string]: unknown
+}
+
+async function handleSearch() {
   if (!searchQuery.value.trim()) return
-  console.log('Search:', searchQuery.value)
+  if (!authStore.isLoggedIn()) {
+    router.push({ name: 'login', query: { redirect: '/' } })
+    return
+  }
+
+  searchLoading.value = true
+  searchError.value = ''
+  searchResult.value = null
+
+  try {
+    const res = await apiClient.post('/search/before-act', {
+      query: searchQuery.value.trim(),
+      limit: 5,
+      includeCandidateSeed: true,
+      enableVectorSearch: false,
+    })
+    if (res.data?.code === 0) {
+      searchResult.value = res.data.data || {}
+    } else {
+      searchError.value = res.data?.message || 'Search failed'
+    }
+  } catch (error: any) {
+    searchError.value = error?.response?.data?.message || error?.message || 'Search failed'
+  } finally {
+    searchLoading.value = false
+  }
 }
 
 function handleKeydown(e: KeyboardEvent) {
@@ -49,6 +102,10 @@ const categories = [
 ]
 
 const stats = { traces: '2,847+', solutions: '12,840+', tools: '23+', teams: '156+' }
+
+function resultItems() {
+  return searchResult.value?.results || searchResult.value?.items || []
+}
 </script>
 
 <template>
@@ -58,7 +115,7 @@ const stats = { traces: '2,847+', solutions: '12,840+', tools: '23+', teams: '15
       <div class="hero-inner">
         <!-- Badge -->
         <div class="hero-badge">
-          AI Engineering Knowledge Base
+          {{ t('hero.badge') }}
         </div>
 
         <!-- Title -->
@@ -85,9 +142,62 @@ const stats = { traces: '2,847+', solutions: '12,840+', tools: '23+', teams: '15
               :placeholder="t('hero.placeholder')"
               @keydown="handleKeydown"
             />
-            <button class="search-btn" @click="handleSearch">
-              {{ t('hero.search') }}
+            <button class="search-btn" :disabled="searchLoading" @click="handleSearch">
+              {{ searchLoading ? t('hero.searching') : t('hero.search') }}
             </button>
+          </div>
+
+          <div v-if="searchError" class="search-feedback search-feedback--error">
+            {{ searchError }}
+          </div>
+          <div v-else-if="searchResult" class="search-feedback">
+            <template v-if="resultItems().length">
+              <div
+                v-for="item in resultItems().slice(0, 3)"
+                :key="String(item.id || item.title || item.summary)"
+                class="search-result-row"
+              >
+                <strong>{{ item.title || 'Axiqra result' }}</strong>
+                <span>{{ item.summary || item.content || t('hero.matchedFallback') }}</span>
+              </div>
+            </template>
+            <template v-else>
+              <strong>{{ t('hero.noReusableTitle') }}</strong>
+              <span>{{ t('hero.noReusableDesc') }}</span>
+            </template>
+          </div>
+        </div>
+
+        <div class="connect-console">
+          <div class="console-head">
+            <div>
+              <span class="console-kicker">{{ t('hero.connectKicker') }}</span>
+              <strong>{{ t('hero.connectTitle') }}</strong>
+            </div>
+            <router-link v-if="authStore.isLoggedIn()" to="/dashboard" class="console-link">
+              {{ t('common.openDashboard') }}
+            </router-link>
+            <router-link v-else to="/login?redirect=/" class="console-link">
+              {{ t('common.loginToContinue') }}
+            </router-link>
+          </div>
+
+          <div class="console-grid">
+            <div class="console-step">
+              <span>1</span>
+              <p>{{ t('hero.stepReadSkill') }}</p>
+              <code>{{ skillUrl }}</code>
+            </div>
+            <div class="console-step">
+              <span>2</span>
+              <p>{{ t('hero.stepStartAuth') }}</p>
+              <code>{{ authCommand }}</code>
+            </div>
+            <div class="console-step">
+              <span>3</span>
+              <p>{{ t('hero.stepWaitToken') }}</p>
+              <code>{{ waitCommand }}</code>
+            </div>
           </div>
         </div>
 
@@ -304,6 +414,144 @@ const stats = { traces: '2,847+', solutions: '12,840+', tools: '23+', teams: '15
   background: var(--color-primary-hover);
 }
 
+.search-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.search-feedback {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 540px;
+  margin: var(--space-4) auto 0;
+  padding: var(--space-4);
+  text-align: left;
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-feedback strong {
+  display: block;
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+}
+
+.search-feedback span {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.search-feedback--error {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.search-result-row + .search-result-row {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.connect-console {
+  max-width: 760px;
+  margin: var(--space-6) auto var(--space-8);
+  padding: var(--space-4);
+  text-align: left;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.console-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.console-kicker {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--color-primary);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.console-head strong {
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+}
+
+.console-link {
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.console-link:hover {
+  background: var(--color-primary-hover);
+  text-decoration: none;
+}
+
+.console-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.console-step {
+  min-width: 0;
+  padding: var(--space-3);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.console-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 800;
+}
+
+.console-step p {
+  margin-bottom: var(--space-2);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.console-step code {
+  display: block;
+  min-height: 42px;
+  padding: var(--space-2);
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  overflow-wrap: anywhere;
+}
+
 /* Browse label + pills */
 .browse-label {
   font-size: var(--text-sm);
@@ -452,5 +700,22 @@ const stats = { traces: '2,847+', solutions: '12,840+', tools: '23+', teams: '15
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 760px) {
+  .console-head,
+  .search-box {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .console-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-btn {
+    width: calc(100% - var(--space-6));
+    margin: 0 var(--space-3) var(--space-3);
+  }
 }
 </style>

@@ -58,8 +58,8 @@ const scopes = computed(() => authStore.user?.scopes || [])
           <h2>{{ t('profile.workspaces') }}</h2>
           <div v-if="workspaces.length" class="list">
             <article v-for="workspace in workspaces" :key="workspace.id" class="list-row">
-              <strong>{{ workspace.name }}</strong>
-              <span>{{ workspace.type }}</span>
+              <strong>{{ workspace.workspaceName }}</strong>
+              <span>{{ workspace.workspaceType }}</span>
             </article>
           </div>
           <div v-else class="empty">{{ t('profile.noWorkspaces') }}</div>

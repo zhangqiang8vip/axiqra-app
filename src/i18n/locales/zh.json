@@ -3,9 +3,23 @@
     "brand": "Axiqra",
     "tagline": "为 AI 编程工具打造的工程记忆库"
   },
+  "common": {
+    "back": "返回",
+    "search": "搜索",
+    "searching": "搜索中...",
+    "loading": "加载中...",
+    "submitting": "提交中...",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "confirm": "确认"
+  },
   "nav": {
     "home": "首页",
     "dashboard": "工作台",
+    "contribution": "贡献中心",
     "publicCases": "公开案例",
     "leaderboard": "工具模型",
     "profile": "个人资料",
@@ -16,139 +30,300 @@
   },
   "routes": {
     "home": "首页",
+    "search": "搜索",
+    "publicCases": "公开案例",
+    "publicCaseDetail": "案例详情",
+    "solutions": "解决方案",
+    "solutionDetail": "方案详情",
+    "connect": "AI 接入",
+    "connectSession": "会话详情",
+    "traceNew": "新建轨迹",
+    "traceConfirm": "确认轨迹",
+    "traceDetail": "轨迹详情",
+    "projectCases": "项目案例",
+    "projectCaseDetail": "案例详情",
+    "seedNew": "创建 Seed",
+    "seedDetail": "Seed 详情",
+    "reviews": "审核队列",
+    "workspace": "工作空间",
+    "enterprise": "企业空间",
+    "certifications": "认证管理",
+    "leaderboard": "排行榜",
+    "admin": "管理后台",
     "deviceAuth": "设备授权",
     "dashboard": "工作台",
     "profile": "个人资料",
     "settings": "设置",
-    "publicCases": "公开案例",
     "toolModels": "工具模型",
+    "contribution": "贡献中心",
     "login": "登录",
     "register": "注册",
     "notFound": "未找到页面"
   },
-  "common": {
-    "loading": "加载中",
-    "refresh": "刷新",
-    "liveApi": "真实 API",
-    "unavailable": "暂不可用",
-    "openDashboard": "打开工作台",
-    "loginToContinue": "登录后继续",
-    "empty": "暂无数据",
-    "backHome": "返回首页"
-  },
-  "hero": {
-    "badge": "Axiqra 接入控制台",
-    "title": "工程记忆搜索引擎",
-    "subtitle": "为 AI 编程工具打造的工程记忆库。搜索真实案例、Trace、Solution，让 AI 真正理解你的代码上下文。",
-    "placeholder": "搜索问题、Trace、解决方案...",
-    "search": "搜索",
-    "searching": "搜索中",
-    "orBrowse": "按分类浏览",
-    "noReusableTitle": "还没有可复用方案。",
-    "noReusableDesc": "可以从 Agent 流程创建 Seed 或提交 Trace，把这个缺口变成可复用工程记忆。",
-    "matchedFallback": "命中的工程记忆",
-    "connectKicker": "当前 demo 主链路",
-    "connectTitle": "Skill 授权 → 搜索 → Seed / Trace / Feedback",
-    "stepReadSkill": "让 Agent 读取 Skill",
-    "stepStartAuth": "发起设备授权",
-    "stepWaitToken": "授权后等待 token"
-  },
-  "categories": {
-    "title": "按分类浏览",
-    "codeCompletion": "代码补全",
-    "codeCompletionDesc": "自动补全、建议提示、多光标编辑",
-    "refactoring": "代码重构",
-    "refactoringDesc": "代码转换、模式迁移、代码清理",
-    "debugging": "调试排错",
-    "debuggingDesc": "错误分析、堆栈跟踪、修复生成",
-    "codeReview": "代码审查",
-    "codeReviewDesc": "PR 分析、最佳实践、安全检查",
-    "documentation": "文档生成",
-    "documentationDesc": "注释生成、README、API 文档",
-    "testing": "测试生成",
-    "testingDesc": "单元测试、集成测试、覆盖率"
-  },
-  "features": {
-    "title": "为什么选择 Axiqra",
-    "fastSearch": {
-      "title": "极速搜索",
-      "desc": "在数百万工程 traces 和 solutions 中实现亚秒级查询响应。"
+  "home": {
+    "hero": {
+      "title": "工程记忆搜索引擎",
+      "subtitle": "为 AI 编程工具打造的工程记忆库。搜索真实案例、Trace、Solution，让 AI 真正理解你的代码上下文。"
     },
-    "aiNative": {
-      "title": "AI 原生设计",
-      "desc": "从零开始为 AI 代理构建。每个 trace 都经过结构化处理，便于机器理解。"
+    "search": {
+      "placeholder": "搜索问题、错误信息、技术栈..."
     },
-    "traceable": {
-      "title": "全程可追溯",
-      "desc": "从问题到解决方案，每一步都有记录，可复现，可审计。"
+    "quickStart": "快速开始",
+    "links": {
+      "browseCases": "浏览案例",
+      "connectAI": "接入 AI",
+      "exploreSolutions": "探索方案"
     },
-    "collaborative": {
-      "title": "团队知识库",
-      "desc": "在团队内部分享工程洞察。构建一个持续更新的已解决问题代码库。"
+    "valueProps": {
+      "title": "为什么选择 Axiqra",
+      "forHumans": {
+        "title": "人类学习",
+        "desc": "通过真实工程案例学习",
+        "feature1": "问题现场和排查时间线",
+        "feature2": "失败假设和证据链",
+        "feature3": "根因判断和修复步骤",
+        "cta": "浏览案例"
+      },
+      "forAI": {
+        "title": "AI 调用",
+        "desc": "让 AI 工具调用真实方案",
+        "feature1": "执行步骤和验证方式",
+        "feature2": "风险等级和适用边界",
+        "feature3": "失败路径和回滚方式",
+        "cta": "接入 AI"
+      },
+      "traceFlow": {
+        "title": "Trace 回传",
+        "desc": "记录真实工程过程",
+        "feature1": "Engineering Trace Package",
+        "feature2": "Project Case 生成",
+        "feature3": "Public Case 沉淀",
+        "cta": "提交轨迹"
+      }
+    },
+    "howItWorks": {
+      "title": "工作流程",
+      "step1": { "title": "搜索", "desc": "搜索相关问题或技术栈" },
+      "step2": { "title": "学习", "desc": "查看 Solution 和 Public Case" },
+      "step3": { "title": "执行", "desc": "AI 按方案执行任务" },
+      "step4": { "title": "反馈", "desc": "提交 Trace 和 Feedback" }
+    },
+    "trust": {
+      "title": "可信保证",
+      "riskLevel": { "title": "风险等级 R0-R4", "desc": "每条方案标注风险等级" },
+      "verificationLevel": { "title": "验证等级 L0-L5", "desc": "验证方式清晰可查" },
+      "review": { "title": "审核机制", "desc": "内容经过审核发布" },
+      "feedback": { "title": "真实反馈", "desc": "调用结果可追溯" }
+    },
+    "cta": {
+      "title": "开始使用",
+      "desc": "搜索真实工程方案，让 AI 真正理解你的上下文",
+      "startFree": "免费开始",
+      "login": "登录",
+      "searchNow": "立即搜索"
     }
   },
-  "stats": {
-    "title": "快速成长中",
-    "traces": "已索引 Traces",
-    "solutions": "可用 Solutions",
-    "tools": "支持的 AI 工具",
-    "teams": "已入驻团队"
+  "search": {
+    "title": "搜索",
+    "placeholder": "输入问题、错误信息、技术栈...",
+    "empty": "没有找到匹配的方案",
+    "createSeed": "创建 Seed",
+    "loadMore": "加载更多",
+    "resultCount": "找到 {count} 个结果",
+    "filters": {
+      "allTypes": "所有类型",
+      "solutions": "Solutions",
+      "publicCases": "Public Cases",
+      "projectCases": "Project Cases",
+      "seeds": "Seeds",
+      "techStack": "技术栈",
+      "allRiskLevels": "所有风险等级",
+      "allVerificationLevels": "所有验证等级",
+      "clear": "清除筛选"
+    }
   },
-  "auth": {
-    "title": "设备授权",
-    "subtitle": "请在终端查看授权码并输入",
-    "confirmSubtitle": "确认当前 Agent 可以访问你的 Axiqra 账号",
-    "startSubtitle": "请先从 Agent 或终端发起设备授权",
-    "missingTitle": "没有检测到授权参数",
-    "missingDesc": "在 Skill 目录执行授权启动命令，拿到授权链接后再回到这里。",
-    "codeLabel": "授权码",
-    "deviceCode": "Device code",
-    "inputLabel": "输入授权码",
-    "placeholder": "例如: ABC-123",
-    "verifyBtn": "验证授权",
-    "verifying": "验证中...",
-    "successTitle": "授权成功",
-    "successDesc": "请回到终端继续操作",
-    "continueRun": "继续运行",
-    "expireNote": "授权码有效期 10 分钟",
-    "verifyInputRequired": "请输入授权码",
-    "codeMismatch": "授权码不匹配，请检查后重试",
-    "verifyFailed": "验证失败，请重试",
-    "networkError": "网络错误，请检查网络后重试",
-    "loginTitle": "欢迎回来",
-    "loginSubtitle": "登录到 Axiqra",
-    "redirectDevice": "完成 Agent 设备授权",
-    "redirectHome": "回到 Axiqra 控制台",
-    "redirectPath": "继续访问 {path}",
-    "agentAuthStatus": "Agent 授权",
-    "agentAuthCopy": "登录后会自动回到授权页。确认授权成功后，再回到终端运行等待命令。",
-    "demoStatus": "Demo 检查点",
-    "demoCopy": "登录后可以从首页搜索真实 API、查看工作台状态，并继续完成 Seed / Trace / Feedback 闭环。",
-    "registerTitle": "创建账号",
-    "registerSubtitle": "开始使用 Axiqra",
-    "username": "用户名",
-    "usernamePlaceholder": "输入用户名",
-    "email": "邮箱",
-    "emailPlaceholder": "输入邮箱地址",
-    "nickname": "昵称",
-    "nicknamePlaceholder": "输入昵称（可选）",
-    "password": "密码",
-    "passwordPlaceholder": "输入密码",
-    "loginBtn": "登录",
-    "registerBtn": "注册",
-    "loggingIn": "登录中...",
-    "registering": "注册中...",
-    "loginFailed": "登录失败，请检查用户名和密码",
-    "registerFailed": "注册失败，请重试",
-    "noAccount": "还没有账号？",
-    "registerNow": "立即注册",
-    "hasAccount": "已有账号？",
-    "loginNow": "立即登录",
-    "strengthVeryWeak": "非常弱",
-    "strengthWeak": "弱",
-    "strengthFair": "一般",
-    "strengthStrong": "强",
-    "strengthVeryStrong": "非常强"
+  "publicCase": {
+    "problemStatement": "问题现场",
+    "techEnvironment": "技术环境",
+    "techStack": "技术栈",
+    "environment": "环境",
+    "timeline": "排查时间线",
+    "failureHypotheses": "失败假设",
+    "evidenceChain": "证据链",
+    "rootCause": "根因判断",
+    "fixSteps": "修复步骤",
+    "verificationResult": "验证结果",
+    "learningSummary": "学习总结",
+    "migrationBoundary": "迁移边界",
+    "feedback": "学习反馈",
+    "feedbackHelpful": "有帮助",
+    "feedbackCorrection": "纠错",
+    "feedbackUnclear": "没看懂",
+    "feedbackSuccess": "反馈已提交",
+    "feedbackFailed": "反馈提交失败"
+  },
+  "solution": {
+    "title": "解决方案",
+    "executionView": "执行视图",
+    "learningView": "学习视图",
+    "applicableScenario": "适用场景",
+    "inapplicableBoundary": "不适用边界",
+    "prerequisites": "前置条件",
+    "executionSteps": "执行步骤",
+    "expectedResult": "预期结果",
+    "verificationSteps": "验证步骤",
+    "riskNotes": "风险提示",
+    "rollbackMethod": "回滚方式",
+    "failurePaths": "失败路径",
+    "aiPrompt": "AI 调用指令",
+    "requiredConfirmation": "需用户确认",
+    "whyItWorks": "方案为什么成立",
+    "commonMisuses": "常见误判",
+    "boundaryExplanation": "边界解释",
+    "feedbackStats": "反馈统计",
+    "invocationCount": "调用次数",
+    "successRate": "成功率",
+    "worked": "有效",
+    "failed": "无效",
+    "partial": "部分有效",
+    "notApplicable": "不适用",
+    "feedbackSuccess": "反馈已提交",
+    "feedbackFailed": "反馈提交失败"
+  },
+  "connect": {
+    "title": "AI 接入",
+    "description": "让 AI 工具接入 Axiqra 工程记忆系统",
+    "createSession": "创建接入会话",
+    "creating": "创建中...",
+    "create": "创建",
+    "channels": {
+      "cli": "命令行工具",
+      "mcp": "MCP 协议",
+      "api": "REST API"
+    },
+    "sessions": "我的会话",
+    "noSessions": "还没有接入会话",
+    "howItWorks": "接入流程",
+    "steps": {
+      "step1": "选择接入渠道（CLI/MCP/API）",
+      "step2": "复制安装指令给 AI 工具",
+      "step3": "AI 工具执行诊断检查",
+      "step4": "开始使用 Search Before Act"
+    },
+    "session": {
+      "title": "会话详情",
+      "instructions": "安装指令",
+      "copyInstructions": "复制指令",
+      "doctorCheck": "诊断检查",
+      "runDoctor": "运行诊断",
+      "running": "诊断中...",
+      "scopes": "授权范围",
+      "revoke": "撤销会话"
+    }
+  },
+  "trace": {
+    "new": {
+      "title": "新建轨迹",
+      "description": "记录工程过程，生成 Engineering Trace Package",
+      "submit": "下一步：确认轨迹"
+    },
+    "confirm": {
+      "title": "确认轨迹",
+      "outcome": "执行结果",
+      "outcomePlaceholder": "描述任务的执行结果...",
+      "submit": "确认提交"
+    },
+    "detail": {
+      "title": "轨迹详情"
+    },
+    "list": {
+      "title": "我的轨迹",
+      "description": "查看和管理您提交的所有工程轨迹",
+      "newTrace": "新建轨迹",
+      "all": "全部",
+      "empty": "还没有轨迹记录",
+      "createFirst": "创建第一个轨迹",
+      "prev": "上一页",
+      "next": "下一页"
+    },
+    "form": {
+      "taskGoal": "任务目标",
+      "taskGoalPlaceholder": "描述要完成的任务...",
+      "projectContext": "项目上下文",
+      "projectContextPlaceholder": "项目的技术栈、环境、约束等...",
+      "forwardSteps": "执行步骤",
+      "stepPlaceholder": "步骤描述",
+      "commandPlaceholder": "执行的命令（可选）",
+      "resultPlaceholder": "执行结果（可选）",
+      "addStep": "添加步骤",
+      "reversePath": "逆向路径",
+      "reversePathPlaceholder": "输入逆向排查步骤，每行一个...",
+      "reversePathHint": "记录从问题到根因的排查过程",
+      "failurePath": "失败路径",
+      "failurePathPlaceholder": "输入可能失败的场景，每行一个...",
+      "failurePathHint": "记录该方案可能失败的各种情况",
+      "decisionPath": "决策路径",
+      "decisionSituation": "决策情境",
+      "decisionSituationPlaceholder": "描述需要做决策的情况...",
+      "decisionOptions": "可选方案",
+      "decisionOptionPlaceholder": "输入一个选项...",
+      "decisionChosenPlaceholder": "选择了哪个方案...",
+      "decisionReason": "选择原因",
+      "decisionReasonPlaceholder": "解释为什么做出这个选择...",
+      "addDecision": "添加决策",
+      "addOption": "添加选项",
+      "rollbackPath": "回滚路径",
+      "rollbackPathPlaceholder": "描述如何回滚到之前的状态...",
+      "rollbackPathHint": "记录如果需要回滚的步骤",
+      "evolutionHint": "演进提示",
+      "evolutionHintPlaceholder": "描述方案可能的演进方向...",
+      "evolutionHintHint": "提示该方案未来的改进方向或可能的扩展",
+      "riskLevel": "风险等级",
+      "autoSaved": "自动保存",
+      "showDesensitization": "查看脱敏预览",
+      "hideDesensitization": "隐藏脱敏预览",
+      "desensitizationPreview": "脱敏预览",
+      "desensitizationNote": "敏感信息已自动脱敏处理",
+      "clearDraft": "清空草稿"
+    },
+    "riskLevels": {
+      "R0": "无风险",
+      "R1": "低风险",
+      "R2": "中低风险",
+      "R3": "中风险",
+      "R4": "高风险"
+    }
+  },
+  "projectCases": {
+    "title": "我的项目案例",
+    "createNew": "新建案例",
+    "empty": "还没有项目案例"
+  },
+  "seed": {
+    "new": {
+      "title": "创建候选 Seed",
+      "submit": "创建"
+    },
+    "detail": {
+      "title": "Seed 详情"
+    },
+    "form": {
+      "taskGoal": "任务目标",
+      "taskGoalPlaceholder": "描述需要的解决方案...",
+      "techStack": "技术栈",
+      "techStackPlaceholder": "例如：Spring Boot, Kubernetes",
+      "coverageGap": "覆盖缺口",
+      "coverageGapPlaceholder": "描述当前搜索无法满足的需求..."
+    }
+  },
+  "reviews": {
+    "title": "审核队列",
+    "empty": "审核队列为空"
+  },
+  "workspace": {
+    "title": "工作空间",
+    "current": "当前工作空间",
+    "all": "所有工作空间"
   },
   "dashboard": {
     "workspace": "Workspace",
@@ -171,7 +346,7 @@
   },
   "profile": {
     "title": "个人资料",
-    "subtitle": "当前 demo 会话的账号、token 和 workspace 可见性。",
+    "subtitle": "管理你的账号信息和 workspace 可见性。",
     "account": "账号",
     "username": "用户名",
     "email": "邮箱",
@@ -189,7 +364,7 @@
   },
   "settings": {
     "title": "设置",
-    "subtitle": "当前前端 demo 的最小本地设置。",
+    "subtitle": "配置应用外观、主题和 API 连接。",
     "appearance": "外观",
     "theme": "主题",
     "language": "语言",
@@ -204,7 +379,7 @@
   },
   "publicCases": {
     "title": "公开案例",
-    "subtitle": "浏览可复用的公开工程案例。如果 API 暂未准备好，本页也会保留 demo 所需的页面结构。",
+    "subtitle": "浏览可复用的公开工程案例。",
     "caseFallback": "公开案例",
     "status": "状态",
     "empty": "暂未返回公开案例",
@@ -221,7 +396,131 @@
   },
   "notFound": {
     "title": "页面不存在",
-    "subtitle": "当前 Axiqra demo 还没有这个路由。"
+    "subtitle": "您访问的页面不存在。"
+  },
+  "enterprise": {
+    "title": "企业空间",
+    "currentWorkspace": "当前企业空间",
+    "loadError": "加载失败",
+    "tabs": {
+      "overview": "概览",
+      "members": "成员管理",
+      "settings": "设置"
+    },
+    "stats": {
+      "members": "成员数",
+      "projects": "项目数",
+      "solutions": "方案数",
+      "storage": "存储使用"
+    },
+    "members": {
+      "title": "成员管理",
+      "list": "成员列表",
+      "invite": "邀请成员",
+      "empty": "暂无成员"
+    },
+    "settings": {
+      "general": "常规设置",
+      "workspaceName": "空间名称",
+      "visibility": "可见范围",
+      "security": "安全设置",
+      "sso": "SSO 单点登录",
+      "ssoDesc": "配置企业 SSO 认证",
+      "auditLog": "审计日志",
+      "auditLogDesc": "查看操作审计记录"
+    }
+  },
+  "certification": {
+    "title": "认证管理",
+    "loadError": "加载失败",
+    "createNew": "创建凭证",
+    "createFirst": "创建第一个凭证",
+    "empty": "暂无认证凭证",
+    "copy": "复制",
+    "regenerate": "重新生成",
+    "revoke": "撤销",
+    "revokeConfirm": "确定要撤销此凭证吗？撤销后将无法恢复。",
+    "createdAt": "创建时间",
+    "lastUsed": "最后使用",
+    "permissions": "权限范围",
+    "types": {
+      "apiKey": "API Key",
+      "oauth": "OAuth",
+      "mcp": "MCP Token",
+      "cli": "CLI Token"
+    },
+    "status": {
+      "active": "有效",
+      "inactive": "未激活",
+      "expired": "已过期"
+    }
+  },
+  "leaderboard": {
+    "title": "排行榜",
+    "subtitle": "比较 AI 工具和模型的表现",
+    "loadError": "加载失败",
+    "tabs": {
+      "tools": "工具排行",
+      "models": "模型排行"
+    },
+    "timeRange": {
+      "week": "本周",
+      "month": "本月",
+      "allTime": "全部时间"
+    },
+    "name": "名称",
+    "score": "分数",
+    "runs": "运行次数",
+    "successRate": "成功率",
+    "avgTime": "平均耗时",
+    "trend": "趋势",
+    "howItWorks": "评分规则",
+    "howItWorksDesc": "分数基于以下指标计算：",
+    "metric1": "任务完成率",
+    "metric2": "解决方案准确度",
+    "metric3": "平均响应时间",
+    "submitTool": "提交你的工具",
+    "submitToolDesc": "想让你的 AI 工具上榜？提交给我们进行评估。",
+    "submitNow": "立即提交"
+  },
+  "admin": {
+    "title": "管理后台",
+    "sections": {
+      "overview": "概览",
+      "users": "用户管理",
+      "content": "内容审核",
+      "audit": "审计日志"
+    },
+    "health": {
+      "healthy": "系统正常",
+      "warning": "需要注意",
+      "critical": "系统异常"
+    },
+    "stats": {
+      "totalUsers": "总用户数",
+      "activeUsers": "活跃用户",
+      "totalSolutions": "总方案数",
+      "totalTraces": "总轨迹数"
+    },
+    "recentActivity": "最近活动",
+    "pendingApprovals": "待审批",
+    "approve": "批准",
+    "reject": "拒绝",
+    "noPendingUsers": "暂无待审批用户",
+    "allUsers": "所有用户",
+    "userListPlaceholder": "用户列表将在这里显示",
+    "contentModeration": "内容审核",
+    "pendingReviews": "待审核",
+    "contentListPlaceholder": "待审核内容列表",
+    "auditLog": "审计日志",
+    "auditLogPlaceholder": "系统操作日志",
+    "exportLogs": "导出日志",
+    "exportCsv": "导出 CSV",
+    "exportJson": "导出 JSON"
+  },
+  "visibility": {
+    "enterprise": "企业可见",
+    "private": "仅自己可见"
   },
   "footer": {
     "copyright": "© 2026 Axiqra. 保留所有权利。"

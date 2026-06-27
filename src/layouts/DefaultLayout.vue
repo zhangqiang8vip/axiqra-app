@@ -12,7 +12,7 @@ const themeStore = useThemeStore()
 const authStore = useAuthStore()
 
 const isDark = computed(() => themeStore.theme === 'dark')
-const isLoggedIn = computed(() => authStore.isLoggedIn())
+const isLoggedIn = computed(() => !!authStore.token)
 const userMenuOpen = ref(false)
 
 function toggleLocale() {
@@ -203,6 +203,10 @@ onUnmounted(() => {
         <nav class="nav">
           <a href="/" class="nav-link">{{ t('nav.home') }}</a>
           <a v-if="isLoggedIn" href="/dashboard" class="nav-link">{{ t('nav.dashboard') }}</a>
+          <a v-if="isLoggedIn" href="/workspace" class="nav-link">{{ t('nav.workspace') || '空间' }}</a>
+          <a v-if="isLoggedIn" href="/project-cases" class="nav-link">项目</a>
+          <a v-if="isLoggedIn" href="/solutions" class="nav-link">方案</a>
+          <a v-if="isLoggedIn" href="/contribution" class="nav-link">{{ t('nav.contribution') }}</a>
           <a href="/public-cases" class="nav-link">{{ t('nav.publicCases') }}</a>
           <a href="/tool-models" class="nav-link">{{ t('nav.leaderboard') }}</a>
         </nav>
@@ -254,6 +258,12 @@ onUnmounted(() => {
                     <circle cx="12" cy="7" r="4"/>
                   </svg>
                   {{ t('nav.profile') || 'Profile' }}
+                </a>
+                <a href="/contribution" class="dropdown-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                  {{ t('nav.contribution') || 'Contribution' }}
                 </a>
                 <a href="/settings" class="dropdown-item">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

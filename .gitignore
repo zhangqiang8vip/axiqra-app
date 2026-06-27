@@ -6,3 +6,5 @@ dist/
 .env.*.local
 .DS_Store
 *.log
+# Local design docs — kept off-source for now
+docs/

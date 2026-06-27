@@ -14,7 +14,7 @@ apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('axiqra_token')
     if (token && config.headers) {
-      config.headers['Authorization'] = `Bearer ${token}`
+      config.headers['Authorization'] = token
     }
     return config
   },

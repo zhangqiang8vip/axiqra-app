@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "dashboard": "Dashboard",
+    "contribution": "Contribution",
     "publicCases": "Public Cases",
     "leaderboard": "Tool Models",
     "profile": "Profile",
@@ -22,6 +23,15 @@
     "settings": "Settings",
     "publicCases": "Public Cases",
     "toolModels": "Tool Models",
+    "enterprise": "Enterprise",
+    "certifications": "Certifications",
+    "leaderboard": "Leaderboard",
+    "admin": "Admin",
+    "contribution": "Contribution",
+    "traces": "Traces",
+    "traceNew": "New Trace",
+    "traceConfirm": "Confirm Trace",
+    "traceDetail": "Trace Details",
     "login": "Login",
     "register": "Register",
     "notFound": "Not Found"
@@ -47,7 +57,7 @@
     "noReusableTitle": "No reusable solution yet.",
     "noReusableDesc": "Create a Seed or submit a Trace from the agent flow to turn this gap into reusable memory.",
     "matchedFallback": "Matched engineering memory",
-    "connectKicker": "Current demo flow",
+    "connectKicker": "Current flow",
     "connectTitle": "Skill authorization → Search → Seed / Trace / Feedback",
     "stepReadSkill": "Ask the agent to read the Skill",
     "stepStartAuth": "Start device authorization",
@@ -171,7 +181,7 @@
   },
   "profile": {
     "title": "Profile",
-    "subtitle": "Account, token, and workspace visibility for the current demo session.",
+    "subtitle": "Manage your account and workspace visibility.",
     "account": "Account",
     "username": "Username",
     "email": "Email",
@@ -189,7 +199,7 @@
   },
   "settings": {
     "title": "Settings",
-    "subtitle": "Minimal local settings for the current frontend demo.",
+    "subtitle": "Configure appearance, theme, and API connection.",
     "appearance": "Appearance",
     "theme": "Theme",
     "language": "Language",
@@ -204,7 +214,7 @@
   },
   "publicCases": {
     "title": "Public Cases",
-    "subtitle": "Browse public reusable engineering cases. If the API is not ready, this page still shows the expected demo surface.",
+    "subtitle": "Browse public reusable engineering cases.",
     "caseFallback": "Public case",
     "status": "Status",
     "empty": "No public cases returned yet",
@@ -221,9 +231,206 @@
   },
   "notFound": {
     "title": "Page not found",
-    "subtitle": "This route is not available in the current Axiqra demo."
+    "subtitle": "The page you are looking for does not exist."
+  },
+  "enterprise": {
+    "title": "Enterprise Space",
+    "currentWorkspace": "Current Enterprise Space",
+    "loadError": "Failed to load",
+    "tabs": {
+      "overview": "Overview",
+      "members": "Members",
+      "settings": "Settings"
+    },
+    "stats": {
+      "members": "Members",
+      "projects": "Projects",
+      "solutions": "Solutions",
+      "storage": "Storage Used"
+    },
+    "members": {
+      "title": "Member Management",
+      "list": "Member List",
+      "invite": "Invite Member",
+      "empty": "No members yet"
+    },
+    "settings": {
+      "general": "General Settings",
+      "workspaceName": "Space Name",
+      "visibility": "Visibility",
+      "security": "Security Settings",
+      "sso": "SSO Single Sign-On",
+      "ssoDesc": "Configure enterprise SSO authentication",
+      "auditLog": "Audit Log",
+      "auditLogDesc": "View operation audit records"
+    }
+  },
+  "certification": {
+    "title": "Certifications",
+    "loadError": "Failed to load",
+    "createNew": "Create Credential",
+    "createFirst": "Create your first credential",
+    "empty": "No credentials yet",
+    "copy": "Copy",
+    "regenerate": "Regenerate",
+    "revoke": "Revoke",
+    "revokeConfirm": "Are you sure you want to revoke this credential? This action cannot be undone.",
+    "createdAt": "Created",
+    "lastUsed": "Last used",
+    "permissions": "Permissions",
+    "types": {
+      "apiKey": "API Key",
+      "oauth": "OAuth",
+      "mcp": "MCP Token",
+      "cli": "CLI Token"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "expired": "Expired"
+    }
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "subtitle": "Compare AI tools and model performance",
+    "loadError": "Failed to load",
+    "tabs": {
+      "tools": "Tools",
+      "models": "Models"
+    },
+    "timeRange": {
+      "week": "This Week",
+      "month": "This Month",
+      "allTime": "All Time"
+    },
+    "name": "Name",
+    "score": "Score",
+    "runs": "Runs",
+    "successRate": "Success Rate",
+    "avgTime": "Avg Time",
+    "trend": "Trend",
+    "howItWorks": "Scoring Rules",
+    "howItWorksDesc": "Score is calculated based on the following metrics:",
+    "metric1": "Task completion rate",
+    "metric2": "Solution accuracy",
+    "metric3": "Average response time",
+    "submitTool": "Submit Your Tool",
+    "submitToolDesc": "Want your AI tool on the leaderboard? Submit it for evaluation.",
+    "submitNow": "Submit Now"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "sections": {
+      "overview": "Overview",
+      "users": "Users",
+      "content": "Content",
+      "audit": "Audit"
+    },
+    "health": {
+      "healthy": "Healthy",
+      "warning": "Warning",
+      "critical": "Critical"
+    },
+    "stats": {
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "totalSolutions": "Total Solutions",
+      "totalTraces": "Total Traces"
+    },
+    "recentActivity": "Recent Activity",
+    "pendingApprovals": "Pending Approvals",
+    "approve": "Approve",
+    "reject": "Reject",
+    "noPendingUsers": "No pending users",
+    "allUsers": "All Users",
+    "userListPlaceholder": "User list will be displayed here",
+    "contentModeration": "Content Moderation",
+    "pendingReviews": "Pending Reviews",
+    "contentListPlaceholder": "Pending content list",
+    "auditLog": "Audit Log",
+    "auditLogPlaceholder": "System operation logs",
+    "exportLogs": "Export Logs",
+    "exportCsv": "Export CSV",
+    "exportJson": "Export JSON"
+  },
+  "visibility": {
+    "enterprise": "Enterprise Visible",
+    "private": "Private"
   },
   "footer": {
     "copyright": "© 2026 Axiqra. All rights reserved."
+  },
+  "trace": {
+    "new": {
+      "title": "New Trace",
+      "description": "Record your engineering process to generate an Engineering Trace Package",
+      "submit": "Next: Confirm Trace"
+    },
+    "confirm": {
+      "title": "Confirm Trace",
+      "outcome": "Execution Result",
+      "outcomePlaceholder": "Describe the execution result...",
+      "submit": "Confirm & Submit"
+    },
+    "detail": {
+      "title": "Trace Details"
+    },
+    "list": {
+      "title": "My Traces",
+      "description": "View and manage all your engineering traces",
+      "newTrace": "New Trace",
+      "all": "All",
+      "empty": "No traces yet",
+      "createFirst": "Create your first trace",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "form": {
+      "taskGoal": "Task Goal",
+      "taskGoalPlaceholder": "Describe the task to complete...",
+      "projectContext": "Project Context",
+      "projectContextPlaceholder": "Project tech stack, environment, constraints...",
+      "forwardSteps": "Execution Steps",
+      "stepPlaceholder": "Step description",
+      "commandPlaceholder": "Command to execute (optional)",
+      "resultPlaceholder": "Execution result (optional)",
+      "addStep": "Add Step",
+      "reversePath": "Reverse Path",
+      "reversePathPlaceholder": "Enter reverse investigation steps, one per line...",
+      "reversePathHint": "Record the investigation process from problem to root cause",
+      "failurePath": "Failure Path",
+      "failurePathPlaceholder": "Enter possible failure scenarios, one per line...",
+      "failurePathHint": "Record various situations where this solution might fail",
+      "decisionPath": "Decision Path",
+      "decisionSituation": "Decision Situation",
+      "decisionSituationPlaceholder": "Describe the situation requiring a decision...",
+      "decisionOptions": "Options",
+      "decisionOptionPlaceholder": "Enter an option...",
+      "decisionChosenPlaceholder": "Which option was chosen...",
+      "decisionReason": "Reason for Choice",
+      "decisionReasonPlaceholder": "Explain why this choice was made...",
+      "addDecision": "Add Decision",
+      "addOption": "Add Option",
+      "rollbackPath": "Rollback Path",
+      "rollbackPathPlaceholder": "Describe how to rollback to previous state...",
+      "rollbackPathHint": "Record steps for rollback if needed",
+      "evolutionHint": "Evolution Hint",
+      "evolutionHintPlaceholder": "Describe possible evolution directions...",
+      "evolutionHintHint": "Hints for future improvements or possible extensions",
+      "riskLevel": "Risk Level",
+      "autoSaved": "Auto-saved",
+      "showDesensitization": "Show Desensitized Preview",
+      "hideDesensitization": "Hide Preview",
+      "desensitizationPreview": "Desensitization Preview",
+      "desensitizationNote": "Sensitive information has been automatically masked",
+      "clearDraft": "Clear Draft"
+    },
+    "riskLevels": {
+      "R0": "No Risk",
+      "R1": "Low Risk",
+      "R2": "Medium-Low Risk",
+      "R3": "Medium Risk",
+      "R4": "High Risk"
+    }
   }
 }

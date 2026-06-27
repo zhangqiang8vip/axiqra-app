@@ -95,12 +95,6 @@ async function handleLogin() {
               <code>node scripts/auth.js --wait &lt;device_code&gt;</code>
             </div>
           </div>
-          <div v-else class="login-context">
-            <div class="context-status">{{ t('auth.demoStatus') }}</div>
-            <div class="context-copy">
-              {{ t('auth.demoCopy') }}
-            </div>
-          </div>
 
           <form class="form" @submit.prevent="handleLogin">
             <div class="input-group">

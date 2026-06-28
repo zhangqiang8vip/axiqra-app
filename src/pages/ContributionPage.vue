@@ -24,16 +24,17 @@ const tiers = [
   { name: 'Gold', minPoints: 501, maxPoints: 2000, color: '#ffd700' },
   { name: 'Platinum', minPoints: 2001, maxPoints: 10000, color: '#94a3b8' },
   { name: 'Diamond', minPoints: 10001, maxPoints: Infinity, color: '#60a5fa' },
-]
+] as const
 
 const currentTier = computed(() => {
-  return tiers.find(t => contributionStats.value.totalPoints >= t.minPoints && contributionStats.value.totalPoints <= t.maxPoints) || tiers[0]
+  return tiers.find(t => contributionStats.value.totalPoints >= t.minPoints && contributionStats.value.totalPoints <= t.maxPoints) ?? tiers[0]
 })
 
 const pointsToNextTier = computed(() => {
   const nextTierIndex = tiers.findIndex(t => t.name === currentTier.value.name) + 1
   if (nextTierIndex >= tiers.length) return null
-  return tiers[nextTierIndex].minPoints - contributionStats.value.totalPoints
+  const nextTier = tiers[nextTierIndex]
+  return nextTier ? nextTier.minPoints - contributionStats.value.totalPoints : null
 })
 
 const tierProgress = computed(() => {

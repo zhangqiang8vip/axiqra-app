@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { traceApi, seedApi, solutionApi } from '@/api'
 import { useAuthStore } from '@/stores/auth'
@@ -24,7 +23,6 @@ const workspace = computed(() => {
   if (authStore.currentWorkspace) return authStore.currentWorkspace
   return authStore.user?.workspaces?.[0] || null
 })
-const userAvatar = computed(() => authStore.getAvatarUrl())
 
 const quickActions = [
   { label: '搜索', icon: 'search', route: '/search', color: 'primary' },
@@ -43,7 +41,7 @@ const navItems = [
 
 async function loadDashboard() {
   loading.value = true
-  const workspaceId = authStore.currentWorkspaceId
+  const workspaceId = authStore.currentWorkspaceId || undefined
 
   const [traceResult, seedResult, solutionResult] = await Promise.allSettled([
     traceApi.list({ workspaceId, page: 1, pageSize: 5 }),
@@ -54,19 +52,22 @@ async function loadDashboard() {
   if (traceResult.status === 'fulfilled') {
     const data = traceResult.value
     traces.value = Array.isArray(data) ? data : (data.list || [])
-    stats.value[0].value = traces.value.length
+    const traceStat = stats.value[0]
+    if (traceStat) traceStat.value = traces.value.length
   }
 
   if (seedResult.status === 'fulfilled') {
     const data = seedResult.value
     seeds.value = Array.isArray(data) ? data : (data.list || [])
-    stats.value[1].value = seeds.value.length
+    const seedStat = stats.value[1]
+    if (seedStat) seedStat.value = seeds.value.length
   }
 
   if (solutionResult.status === 'fulfilled') {
     const data = solutionResult.value
     solutions.value = Array.isArray(data) ? data : (data.list || [])
-    stats.value[2].value = solutions.value.length
+    const solutionStat = stats.value[2]
+    if (solutionStat) solutionStat.value = solutions.value.length
   }
 
   loading.value = false

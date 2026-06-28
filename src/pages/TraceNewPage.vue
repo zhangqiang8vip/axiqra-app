@@ -43,6 +43,7 @@ const steps = [
 
 // Current step
 const currentStep = ref(0)
+const currentStepTitle = computed(() => steps[currentStep.value]?.title || '')
 
 // Auto-save
 let autoSaveTimer: ReturnType<typeof setTimeout> | null = null
@@ -237,7 +238,7 @@ onMounted(() => {
             {{ index + 1 }}
           </button>
         </div>
-        <p class="progress-text">Step {{ currentStep + 1 }} of {{ steps.length }}: {{ steps[currentStep].title }}</p>
+        <p class="progress-text">Step {{ currentStep + 1 }} of {{ steps.length }}: {{ currentStepTitle }}</p>
       </div>
 
       <!-- Preview Panel -->

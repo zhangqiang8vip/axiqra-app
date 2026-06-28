@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { projectCaseApi } from '@/api'
 import { DataState, RiskBadge, StatusBadge } from '@/components'
@@ -8,7 +8,6 @@ import type { ProjectCase } from '@/types'
 
 const { t } = useI18n()
 const route = useRoute()
-const router = useRouter()
 
 const projectCase = ref<ProjectCase | null>(null)
 const loading = ref(true)
@@ -42,7 +41,7 @@ onMounted(loadProjectCase)
         <template v-if="projectCase">
           <header class="page-header">
             <div class="header-badges">
-              <RiskBadge :level="projectCase.riskLevel" />
+              <RiskBadge v-if="projectCase.riskLevel" :level="projectCase.riskLevel" />
               <StatusBadge :status="projectCase.status" />
             </div>
             <h1>{{ projectCase.title }}</h1>

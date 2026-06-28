@@ -22,6 +22,7 @@ export const solutionApi = {
   list: async (params?: {
     page?: number
     pageSize?: number
+    workspaceId?: number
     techStack?: string
     riskLevel?: string
     status?: string

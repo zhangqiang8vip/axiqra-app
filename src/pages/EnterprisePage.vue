@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useAuthStore } from '@/stores/auth'
 import { workspaceApi } from '@/api'
 import { Card, DataState } from '@/components'
 import type { Workspace, MemberRole } from '@/types'
 
 const { t } = useI18n()
-const authStore = useAuthStore()
 
 const workspaces = ref<Workspace[]>([])
 const loading = ref(true)
@@ -42,11 +40,6 @@ onMounted(async () => {
     loading.value = false
   }
 })
-
-function switchWorkspace(ws: Workspace) {
-  currentWorkspace.value = ws
-  authStore.setCurrentWorkspace(ws.id)
-}
 
 async function loadMembers() {
   if (!currentWorkspace.value) return

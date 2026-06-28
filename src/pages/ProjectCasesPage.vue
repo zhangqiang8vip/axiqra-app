@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
-import { projectCaseApi, traceApi } from '@/api'
+import { projectCaseApi } from '@/api'
 import { DataState } from '@/components'
 import type { ProjectCase } from '@/types'
 
-const { t } = useI18n()
 const router = useRouter()
 const authStore = useAuthStore()
 
@@ -32,7 +30,7 @@ const filteredCases = computed(() => {
 async function loadCases() {
   loading.value = true
   try {
-    const workspaceId = authStore.currentWorkspaceId
+    const workspaceId = authStore.currentWorkspaceId || undefined
     const data = await projectCaseApi.list({ 
       page: 1, 
       pageSize: 50,
@@ -157,7 +155,7 @@ onMounted(() => {
               </span>
             </div>
             <div class="case-card__date">
-              {{ c.gmtCreate ? new Date(c.gmtCreate).toLocaleDateString() : '' }}
+              {{ c.gmtCreate || c.createdAt ? new Date(c.gmtCreate || c.createdAt || '').toLocaleDateString() : '' }}
             </div>
           </div>
         </div>

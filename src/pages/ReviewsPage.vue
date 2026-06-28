@@ -3,7 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { reviewApi } from '@/api'
 import { DataState, RiskBadge } from '@/components'
-import { ReviewDecision, RiskLevel, type ReviewQueueItem } from '@/types'
+import { ReviewDecision, type ReviewQueueItem } from '@/types'
 
 const { t } = useI18n()
 

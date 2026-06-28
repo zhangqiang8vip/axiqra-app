@@ -11,9 +11,12 @@ export interface ApiResponse<T = unknown> {
 
 export interface PageResponse<T = unknown> {
   list: T[]
+  records?: T[]
   total: number
   page: number
   pageSize: number
+  vectorSearchEnabled?: boolean
+  candidateSeedCreated?: boolean
 }
 
 // ============================================================
@@ -195,6 +198,7 @@ export interface CreateWorkspaceRequest {
 export interface SearchRequest {
   query: string
   workspaceId?: number
+  limit?: number
   techStack?: string
   domain?: string
   riskLevel?: RiskLevel
@@ -425,6 +429,7 @@ export interface ProjectCase {
 
   visibilityScope: VisibilityScope
   techStack?: string
+  riskLevel?: RiskLevel
   tags?: string[]
 
   reviewStatus?: ReviewStatus
@@ -432,6 +437,8 @@ export interface ProjectCase {
 
   createdAt?: string
   updatedAt?: string
+  gmtCreate?: string
+  gmtModified?: string
 }
 
 export interface ReviewStatus {

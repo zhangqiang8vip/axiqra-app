@@ -18,7 +18,7 @@ const error = ref<string | null>(null)
 const currentWorkspace = ref<Workspace | null>(null)
 const showCreateModal = ref(false)
 const newWorkspaceName = ref('')
-const newWorkspaceType = ref<WorkspaceType>(WorkspaceType.PERSONAL)
+const newWorkspaceType = ref<WorkspaceType>(WorkspaceType.Personal)
 const creating = ref(false)
 
 const members = ref<WorkspaceMember[]>([])
@@ -31,9 +31,9 @@ const inviting = ref(false)
 const activeTab = ref<'overview' | 'members'>('overview')
 
 const workspaceTypeOptions = [
-  { value: WorkspaceType.PERSONAL, label: '个人空间' },
-  { value: WorkspaceType.TEAM, label: '团队空间' },
-  { value: WorkspaceType.ENTERPRISE, label: '企业空间' },
+  { value: WorkspaceType.Personal, label: '个人空间' },
+  { value: WorkspaceType.Team, label: '团队空间' },
+  { value: WorkspaceType.Enterprise, label: '企业空间' },
 ]
 
 const isOwner = computed(() => currentWorkspace.value?.myRole === 'owner')
@@ -47,9 +47,10 @@ onMounted(async () => {
   try {
     workspaces.value = await workspaceApi.list()
     currentWorkspace.value = authStore.currentWorkspace || workspaces.value[0] || null
-    if (!authStore.currentWorkspaceId && workspaces.value.length > 0) {
-      authStore.setCurrentWorkspace(workspaces.value[0].id)
-      currentWorkspace.value = workspaces.value[0]
+    const firstWorkspace = workspaces.value[0]
+    if (!authStore.currentWorkspaceId && firstWorkspace) {
+      authStore.setCurrentWorkspace(firstWorkspace.id)
+      currentWorkspace.value = firstWorkspace
     }
     if (currentWorkspace.value?.id) {
       await loadMembers()

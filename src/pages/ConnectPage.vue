@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
 import { connectApi } from '@/api'
 import { DataState, Card, StatusBadge } from '@/components'
-import type { ConnectSession, DoctorResult, DoctorCheck } from '@/types'
+import type { ConnectSession, DoctorResult } from '@/types'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -60,10 +60,6 @@ async function runDoctorCheck(session: ConnectSession) {
   } finally {
     runningDoctor.value = false
   }
-}
-
-function getCheckStatus(check: DoctorCheck): 'pass' | 'fail' | 'warning' | 'skip' {
-  return check.status as any
 }
 
 onMounted(loadSessions)

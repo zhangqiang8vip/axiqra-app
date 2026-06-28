@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import apiClient from '@/api/client'
 import { Card } from '@/components'
 
 const { t } = useI18n()
@@ -54,10 +53,6 @@ onMounted(async () => {
 })
 
 const currentEntries = computed(() => activeTab.value === 'tools' ? toolEntries.value : modelEntries.value)
-
-function getTrendIcon(trend: string): string {
-  return ''
-}
 
 function getTrendClass(trend: string): string {
   const classes: Record<string, string> = {

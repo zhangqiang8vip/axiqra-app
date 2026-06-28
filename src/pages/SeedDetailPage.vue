@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { seedApi } from '@/api'
 import { DataState, StatusBadge } from '@/components'
@@ -8,7 +8,6 @@ import type { CandidateSeed } from '@/types'
 
 const { t } = useI18n()
 const route = useRoute()
-const router = useRouter()
 
 const seed = ref<CandidateSeed | null>(null)
 const loading = ref(true)

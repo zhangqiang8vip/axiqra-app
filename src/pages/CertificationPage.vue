@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useAuthStore } from '@/stores/auth'
 import { Card, DataState } from '@/components'
 
 const { t } = useI18n()
-const authStore = useAuthStore()
 
 const loading = ref(true)
 const error = ref<string | null>(null)
@@ -98,6 +96,10 @@ async function revokeCertification(id: number) {
 function regenerateCertification(id: number) {
   console.log('Regenerating certification:', id)
 }
+
+function copyCertificationKey(key: string) {
+  window.navigator.clipboard.writeText(key)
+}
 </script>
 
 <template>
@@ -126,7 +128,7 @@ function regenerateCertification(id: number) {
 
             <div class="cert-key">
               <code>{{ cert.keyPreview }}</code>
-              <button class="btn btn--ghost btn--sm" @click="navigator.clipboard.writeText(cert.keyPreview)">
+              <button class="btn btn--ghost btn--sm" @click="copyCertificationKey(cert.keyPreview)">
                 {{ t('certification.copy') }}
               </button>
             </div>
